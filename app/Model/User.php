@@ -6,7 +6,6 @@
  * Time: 2:14 PM
  */
 class User extends AppModel {
-   // public $validate = array("name" => array("rule" => array('lengthBetween', 6, 10),"message" => "Email not empty !"));
     var $name = "User";
     public $validate = array();
     function validateUser()
