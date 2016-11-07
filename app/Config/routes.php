@@ -32,7 +32,7 @@
 	Router::connect('/users', array('controller' => 'users', 'action' => 'index'));
     Router::connect('/users', array('controller' => 'users', 'action' => 'update'));
     Router::connect('/users', array('controller' => 'users', 'action' => 'create'));
-    Router::connect('/users', array('controller' => 'users', 'action' => 'delete'));
+    Router::connect('/:controller', array('controller' => 'users', 'action' => 'delete'));
 
 /**
  * Load all plugin routes. See the CakePlugin documentation on

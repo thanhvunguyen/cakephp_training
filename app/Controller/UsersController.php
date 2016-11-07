@@ -7,35 +7,38 @@ App::uses('AppController', 'Controller');
 class UsersController extends AppController {
     var $uses = ['User'];
     var $helpers = array("Html","Form");
-    var $components = array("Session");
+    var $components = array("Flash");
     public function index() {
         $data = $this->User->find('all');
         $this->set("data",$data);
     }
 
-     public function update(){
+     public function update($id=null){
         $this->User->set($this->data);
         if($this->data){
             if($this->User->validateUser()==TRUE)
             {
-                $id=$this->data['User']['iduser'];;
+                $id=$this->data['User']['userid'];;
                 $username = $this->data['User']['name'];;
                 $this->User->updateAll(
                     array('User.name' => "'$username'"),
                     array('User.id' => $id)
                 );
                 $this->redirect("info");
-                //$this->Session->setFlash("Dữ liệu hợp lệ!");
-
+                //$this->Flash->set("Dữ liệu hợp lệ!");
             }
 
             else
             {
-                $this->Session->setFlash("Dữ liệu không hợp lệ !");
+                $this->Flash->set("Action can't be performed  !! Fields are in-correct");
 
             }
 
         }
+            $this->User->id=$id;
+            $data = $this->User->findById($id);
+            $this->set("data",$data);
+
 
     }
    public function create(){
@@ -49,13 +52,13 @@ class UsersController extends AppController {
                 //$username = $this->data['User']['name'];
                 $this->User->save($this->data);
                // $this->redirect("info");
-                //$this->Session->setFlash("Dữ liệu hợp lệ!");
+                //$this->Flash->set("Dữ liệu hợp lệ!");
 
             }
 
             else
             {
-                $this->Session->setFlash("Dữ liệu không hợp lệ !");
+                $this->Flash->set("Action can't be performed  !! Fields are in-correct");
 
             }
 
@@ -66,31 +69,10 @@ class UsersController extends AppController {
     public function info(){
 
     }
-    public function delete(){
-        $this->User->set($this->data);
-
-        if($this->data){
-            if($this->User->validateUser()==TRUE)
-            {
-
-
-                $iduser= $this->data['User']['iduser'];
-                $this->User->deleteAll(array('id'=>$iduser));
-                $this->redirect("info");
-                //$this->Session->setFlash("Dữ liệu hợp lệ!");
-
-            }
-
-            else
-            {
-                $this->Session->setFlash("Dữ liệu không hợp lệ !");
-
-            }
-
-        }
-
-
-
+    public function delete($id=null){
+        $this->User->id=$id;
+        $this->User->deleteAll(array('id'=>$id));
+        $this->redirect("index");
 
     }
 

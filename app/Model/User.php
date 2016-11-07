@@ -13,15 +13,43 @@ class User extends AppModel {
     {
         $this->validate = array(
             "name" => array(
-                "dk1" => array(
+                "rule1" => array(
                     "rule" => "notBlank",
-                    "message" => "Name không rỗng !",
+                    "message" => "Name not empty !",
                 ),
-                "dk2" => array(
+                "rule2" => array(
                     "rule"=> array('lengthBetween', 6, 10),
-                    "message" => "Name trong khoảng 6 đến 10 kí tự"
+                    "message" => "Name must be between 5 and 15 characters long."
+                ),
+                "rule3" => array(
+                    "rule"=>"isUnique",
+                    "message" => "Your Username have already existed "
+                ),
+            ),
+            "phone" => array(
+                "rule1" => array(
+                    "rule" => "notBlank",
+                    "message" => "Phone not empty !",
+                ),
+                "rule2" => array(
+                    "rule"=> array('lengthBetween', 10, 11),
+                    "message" => "Phone must be between 10 and 11 characters long."
+                ),
+                "rule3" => array(
+                    "rule"=>"Numeric",
+                    "message" => "Phone number should be numeric"
+                ),
+            ),
+            "email" => array(
+                "rule1" => array(
+                    "rule" => "notBlank",
+                    "message" => "Email not empty !",
                 ),
 
+                "rule2" => array(
+                    "rule"=>"email",
+                    "message" => "Please enter a valid email address"
+                ),
             ),
             "iduser" => array("rule" => "notBlank", "message" => "id not empty !"));
         if($this->validates($this->validate))
