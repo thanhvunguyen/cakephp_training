@@ -33,7 +33,8 @@
     Router::connect('/users', array('controller' => 'users', 'action' => 'update'));
     Router::connect('/users', array('controller' => 'users', 'action' => 'create'));
     Router::connect('/:controller', array('controller' => 'users', 'action' => 'delete'));
-
+    Router::connect('/books', array('controller' => 'books', 'action' => 'index'));
+    Router::connect('/coursestudents', array('controller' => 'coursestudents', 'action' => 'index'));
 /**
  * Load all plugin routes. See the CakePlugin documentation on
  * how to customize the loading of plugin routes.

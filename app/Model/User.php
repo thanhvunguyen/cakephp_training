@@ -58,6 +58,13 @@ class User extends AppModel {
     public function getList() {
         return $this->find('all');
     }
+    public $hasMany = array(
+        'Book' => array(
+            'className' => 'Book',
+            'foreignKey' => 'user_id',
+
+        )
+    );
 
 }
 

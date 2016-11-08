@@ -1,6 +1,6 @@
 <?php
 if($data==NULL){
- echo "<h2>Update</h2>";
+ echo "<h2>Users</h2>";
 }
 else{
  echo "<table>
