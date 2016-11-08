@@ -56,6 +56,13 @@ class User extends AppModel {
         else
             return FALSE;
     }
+    public $hasMany = array(
+        'Book' => array(
+            'className' => 'Book',
+            'foreignKey' => 'user_id',
+
+        )
+    );
 
 }
 

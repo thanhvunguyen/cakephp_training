@@ -17,6 +17,7 @@ class UsersController extends AppController {
         if($this->data){
             if($this->User->validateUser()==TRUE)
             {
+                //$this->Flash->set("Action can be performed !! Fields are in-correct");
                 $id=$this->data['User']['userid'];;
                 $username = $this->data['User']['name'];;
                 $this->User->updateAll(
@@ -24,12 +25,10 @@ class UsersController extends AppController {
                     array('User.id' => $id)
                 );
                 $this->redirect("index");
-                //$this->Flash->set("Action can be performed !! Fields are in-correct");
             }
             else
             {
                 $this->Flash->set("Action can't be performed !! Fields are in-correct");
-
             }
         }
         $this->User->id=$id;
@@ -37,7 +36,6 @@ class UsersController extends AppController {
         $this->set("data",$data);
     }
     public function create(){
-
         $this->User->set($this->data);
         if($this->data){
             if($this->User->validateUser()==TRUE)
@@ -50,10 +48,8 @@ class UsersController extends AppController {
                 $this->Flash->set("Action can't be performed  !! Fields are in-correct");
             }
         }
-
     }
     public function info(){
-
     }
     public function delete($id=null){
         $this->User->id=$id;
