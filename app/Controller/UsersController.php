@@ -3,12 +3,13 @@ App::uses('AppController', 'Controller');
 
 /**
  * Class UsersController
- *
+ *  list user
+ *  update user
+ *  delete user
  * @property User User
- */
+*/
 class UsersController extends AppController {
     var $uses = ['User'];
-
     var $helpers = [
         'Html',
         'Form'
@@ -17,8 +18,8 @@ class UsersController extends AppController {
     var $components = ['Flash'];
 
     /**
-     * Function get list .....
-     * from .... tables
+     * Function get list user
+     * from users tables
      */
     public function index() {
         $data = $this->User->getList();
@@ -27,25 +28,24 @@ class UsersController extends AppController {
     }
 
     /**
+     * function update user
      * @param null $id
      * @return bool
      */
     public function update($id = null) {
         if (empty($this->data)) {
-            return false;
-        }
+            $this->User->id = $id;
+            $data = $this->User->findById($id);
+            $this->set("data",$data);
+        } else {
 
-        $this->User->set($this->data);
+            $this->User->set($this->data);
 
-        if ($this->data) {
-            if ($this->User->validateUser() == true) {
-                $id = $this->data['User']['userId'];
-                $username = $this->data['User']['name'];
+            if ($this->User->validates()== true) {
+                $data=$this->data['User'];
+                $id = $this->User->id;
 
-                $this->User->updateAll(
-                    ['User.name' => "'$username'"],
-                    ['User.id' => $id]
-                );
+                $this->User->updateUser($data,$id);
 
                 $this->redirect("index");
             } else {
@@ -53,24 +53,20 @@ class UsersController extends AppController {
             }
         }
 
-        $this->User->id = $id;
-        $data = $this->User->findById($id);
 
-        $this->set("data",$data);
     }
 
     /**
+     * Function create User
      *
      */
     public function create() {
         if (empty($this->data)) {
             return false;
-        }
-
-        $this->User->set($this->data);
-        if ($this->data) {
-            if ($this->User->validateUser() == true) {
-                $this->User->save($this->data);
+        } else {
+            $this->User->set($this->data);
+            if ($this->User->validates() == true) {
+                $this->User->createUser($this->data);
 
                 $this->redirect("index");
             } else {
@@ -79,12 +75,14 @@ class UsersController extends AppController {
         }
     }
 
-    /** TODO: now don't need */
+    /**TODO: now don't need */
     public function info(){
 
     }
 
     /**
+     * Function delete user
+     *
      * @param null $id
      */
     public function delete ($id = null) {
@@ -92,10 +90,10 @@ class UsersController extends AppController {
         /** TODO: validate id (integer, exist in DB) */
 
         $this->User->id = $id;
-        $this->User->deleteAll(array('id'=>$id));
+        $this->User->deleteUser($id);
 
         // Message bao thanh cong sau khi xoa
-
+        $this->Flash->set("Delete User Succes !!!! ");
         $this->redirect("index");
     }
 

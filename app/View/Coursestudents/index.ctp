@@ -8,6 +8,8 @@ else{
     <td>id</td>
     <td>student_name</td>
     <td>course_name</td>
+    <td>days_attended</td>
+    <td>grade</td>
     <td></td>
  </tr>";
      foreach($data as $item){
@@ -15,6 +17,8 @@ else{
          echo "<td>".$item['Student']['id']."</td>";
          echo "<td>".$item['Student']['student_name']."</td>";
          echo "<td>".$item['Course']['course_name']."</td>";
+         echo "<td>".$item['CourseStudent']['days_attended']."</td>";
+         echo "<td>".$item['CourseStudent']['grade']."</td>";
          echo "</tr>";
 
      }

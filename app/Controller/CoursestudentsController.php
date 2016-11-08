@@ -1,20 +1,20 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Win_64
- * Date: 11/7/2016
- * Time: 9:52 PM
- */
+
 App::uses('AppController', 'Controller');
 
 /**
- * Class UsersController
+ * Class CoursestudentsController
+ * @property CourseStudent CourseStudent
+ *  List students of a course
  */
 class CoursestudentsController extends AppController {
     var $uses = ['CourseStudent'];
+
+    /**
+     * function get list students of course php (course_id = 2)
+     */
     public function index(){
-        $data = $this->CourseStudent->find('all',array(
-            'conditions' => array("CourseStudent.course_id" => 1)));
-        $this->set("data",$data);
+        $data = $this->CourseStudent->find('all',[ 'conditions' =>['CourseStudent.course_id' => 2]]);
+        $this->set('data',$data);
     }
 }

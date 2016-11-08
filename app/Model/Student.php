@@ -1,13 +1,18 @@
 <?php
+
 /**
- * Created by PhpStorm.
- * User: Win_64
- * Date: 11/7/2016
- * Time: 4:26 PM
+ * Class Student
+ * Model Student
+ *
  */
 class Student extends AppModel{
+
     var $name = "Student";
-    public $hasMany = array(
+    /**
+     * @var array
+     *  Relationship: one to many
+     */
+    public $hasMany = [
         'CourseStudent'
-    );
+    ];
 }
